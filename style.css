@@ -1,0 +1,25 @@
+body {
+    font-family: Tahoma, sans-serif;
+    text-align: center;
+    margin-top: 100px;
+    background-color: #f0f0f0;
+}
+
+h1 {
+    color: #333;
+    font-size: 48px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 20px;
+    cursor: pointer;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
