@@ -1,31 +1,26 @@
 <!doctype html>
 <html lang="fa">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>سایت تستی</title>
-  <link rel="stylesheet" href="style.css" />
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>ورود و نمایش ایمیل</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <main class="card">
+  <main>
     <h1>سلام</h1>
 
-    <div id="login" class="box">
-      <input id="pass" type="password" placeholder="رمز سایت را وارد کنید" />
+    <div id="login">
+      <input id="pass" type="password" placeholder="رمز سایت را وارد کنید">
       <button id="btnLogin">ورود</button>
-      <p id="msg" class="muted"></p>
+      <p id="msg"></p>
     </div>
 
-    <div id="panel" class="hidden">
-      <div class="row">
-        <button id="btnConnect" class="big">اتصال به گوگل</button>
-        <button id="btnLoad" class="big">بارگذاری پیام‌ها</button>
-      </div>
-      <ul id="list" class="list"></ul>
-      <button id="btnLogout" class="small">خروج</button>
+    <div id="panel" style="display:none">
+      <button id="btnConnect">اتصال به گوگل</button>
+      <button id="btnLoad" style="display:none">نمایش ایمیل‌ها</button>
+      <ul id="list"></ul>
+      <button id="btnLogout">خروج</button>
     </div>
   </main>
-
   <script src="script.js"></script>
 </body>
 </html>
