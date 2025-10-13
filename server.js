@@ -56,4 +56,11 @@ app.get('/api/emails', async (req,res)=>{
       const headers=msg.data.payload.headers;
       const subject=headers.find(h=>h.name==='Subject')?.value||'';
       const from=headers.find(h=>h.name==='From')?.value||'';
-      const date=headers.find(h=>h.name==='
+      const date=headers.find(h=>h.name==='Date')?.value||'';
+      messages.push({subject,from,date});
+    }
+    res.json({messages});
+  } catch(e){ console.error(e); res.status(500).send('خطا در دریافت ایمیل‌ها'); }
+});
+
+app.listen(PORT,()=>console.log(`Server running at http://localhost:${PORT}`));
