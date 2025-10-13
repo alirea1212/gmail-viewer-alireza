@@ -1,37 +1,31 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fa">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>نمایش ایمیل — تست</title>
-  <link rel="stylesheet" href="/static/style.css" />
+  <title>سایت تستی</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="container">
+  <main class="card">
     <h1>سلام</h1>
 
-    <div id="login-block" class="card">
-      <h2>ورود به سایت</h2>
-      <input id="sitePass" placeholder="رمز سایت را وارد کنید" />
-      <button id="siteLoginBtn">ورود</button>
-      <p id="loginMsg" class="muted"></p>
+    <div id="login" class="box">
+      <input id="pass" type="password" placeholder="رمز سایت را وارد کنید" />
+      <button id="btnLogin">ورود</button>
+      <p id="msg" class="muted"></p>
     </div>
 
-    <div id="panel" class="card hidden">
-      <p>وارد شدی ✅</p>
-      <button id="connectGoogle">اتصال به گوگل (اجازهٔ دسترسی به Gmail)</button>
-      <button id="loadEmails" class="hidden">نمایش ایمیل‌ها</button>
-      <button id="logoutBtn">خروج</button>
-
-      <h3>نتایج:</h3>
-      <ul id="emailsList"></ul>
+    <div id="panel" class="hidden">
+      <div class="row">
+        <button id="btnConnect" class="big">اتصال به گوگل</button>
+        <button id="btnLoad" class="big">بارگذاری پیام‌ها</button>
+      </div>
+      <ul id="list" class="list"></ul>
+      <button id="btnLogout" class="small">خروج</button>
     </div>
+  </main>
 
-    <div class="card">
-      <button id="calcBtn">ماشین حساب ساده</button>
-    </div>
-  </div>
-
-  <script src="/static/script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
