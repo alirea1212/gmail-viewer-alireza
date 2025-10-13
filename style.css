@@ -1,25 +1,14 @@
-body {
-    font-family: Tahoma, sans-serif;
-    text-align: center;
-    margin-top: 100px;
-    background-color: #f0f0f0;
-}
-
-h1 {
-    color: #333;
-    font-size: 48px;
-}
-
-button {
-    padding: 10px 20px;
-    font-size: 20px;
-    cursor: pointer;
-    border: none;
-    background-color: #4CAF50;
-    color: white;
-    border-radius: 5px;
-}
-
-button:hover {
-    background-color: #45a049;
-}
+/* static/style.css */
+:root{--bg:#f4f6f8;--card:#fff;--accent:#2d9cdb}
+*{box-sizing:border-box}
+body{font-family:Tahoma,system-ui;direction:rtl;background:var(--bg);margin:0;padding:30px}
+.container{max-width:720px;margin:0 auto}
+.card{background:var(--card);padding:18px;border-radius:10px;box-shadow:0 6px 18px rgba(10,10,10,.06);margin-bottom:16px}
+.hidden{display:none}
+h1{margin:0 0 10px;font-size:36px;color:#222}
+input{padding:10px;border:1px solid #ddd;border-radius:6px;width:100%;margin-bottom:8px}
+button{padding:10px 14px;border-radius:8px;border:0;background:var(--accent);color:white;cursor:pointer}
+button:active{transform:translateY(1px)}
+.muted{color:#777;font-size:14px}
+#emailsList{list-style:none;padding:0;margin:0}
+#emailsList li{padding:8px;border-bottom:1px dashed #eee}
