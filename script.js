@@ -1,45 +1,36 @@
 // رمز سایت: "علیرضا"
-(() => {
-  const PASS = 'علیرضا';
-  const el = id => document.getElementById(id);
-  const msg = el('msg'), list = el('list');
+const PASS = 'علیرضا';
+const el = id => document.getElementById(id);
 
-  function showPanel(){ el('login').classList.add('hidden'); el('panel').classList.remove('hidden'); }
-  function showLogin(){ el('login').classList.remove('hidden'); el('panel').classList.add('hidden'); list.innerHTML=''; }
+el('btnLogin').onclick = async () => {
+  const v = el('pass').value;
+  const res = await fetch('/api/site-login', {
+    method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({pass:v})
+  });
+  const j = await res.json();
+  if (j.ok) {
+    el('login').style.display='none';
+    el('panel').style.display='block';
+    if (j.oauth) el('btnLoad').style.display='inline-block';
+  } else el('msg').textContent = 'رمز اشتباه';
+};
 
-  el('btnLogin').onclick = () => {
-    if (el('pass').value === PASS) { showPanel(); msg.textContent=''; }
-    else msg.textContent = 'رمز اشتباه';
-  };
+el('btnConnect').onclick = () => { // آغاز OAuth
+  window.location.href = '/api/auth/google';
+};
 
-  el('btnLogout').onclick = () => { el('pass').value=''; showLogin(); }
+el('btnLoad').onclick = async () => {
+  el('list').innerHTML = '<li>در حال بارگذاری...</li>';
+  const r = await fetch('/api/emails');
+  if (r.status===401) { el('list').innerHTML=''; alert('ابتدا اتصال گوگل را انجام بده'); return; }
+  const j = await r.json();
+  el('list').innerHTML = '';
+  if (!j.messages || j.messages.length===0) el('list').innerHTML = '<li>پیامی نیست</li>';
+  j.messages.forEach(m=>{
+    const li = document.createElement('li');
+    li.innerHTML = `<b>${m.subject||'(بدون موضوع)'}</b><div>${m.from} — ${m.date}</div>`;
+    el('list').appendChild(li);
+  });
+};
 
-  // دکمه اتصال: فقط ریدایرکت به آدرس سرور برای OAuth (سرور نیاز است)
-  el('btnConnect').onclick = () => {
-    // اگر سرور OAuth داری، آدرس را بذار اینجا:
-    // window.location.href = 'https://your-domain.com/api/auth/google';
-    alert('این دکمه برای اتصال به گوگل است. باید سرور OAuth راه‌اندازی شود.');
-  };
-
-  // بارگذاری پیام‌ها: درخواست شبیه‌سازی به آدرس mock
-  el('btnLoad').onclick = async () => {
-    list.innerHTML = '<li>در حال بارگذاری...</li>';
-    try {
-      // برای حالا از یک endpoint شبیه‌سازی‌شده استفاده می‌کنیم.
-      // در سرور واقعی باید این آدرس یک پروکسی امن باشد که با OAuth ایمیل می‌خواند.
-      const res = await fetch('/api/mock-emails');
-      if (!res.ok) throw new Error('خطا');
-      const j = await res.json();
-      list.innerHTML = '';
-      if (!j.length) list.innerHTML = '<li>پیامی نیست</li>';
-      j.forEach(m=>{
-        const li = document.createElement('li');
-        li.innerHTML = `<strong>${m.subject||'(بدون موضوع)'}</strong><div style="color: #9aa6b2;font-size:13px">${m.from} — ${m.date}</div>`;
-        list.appendChild(li);
-      });
-    } catch (e) {
-      list.innerHTML = '<li>خطا در دریافت پیام‌ها</li>';
-    }
-  };
-
-})();
+el('btnLogout').onclick = async ()=> { await fetch('/api/site-logout',{method:'POST'}); el('panel').style.display='none'; el('login').style.display='block'; }
