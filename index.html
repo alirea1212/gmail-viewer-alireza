@@ -1,28 +1,73 @@
 <!doctype html>
-<html lang="fa">
+<html lang="fa" dir="rtl">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>ورود و نمایش ایمیل</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>گردونه شانس 🎉</title>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <main class="card">
-    <h1>سلام</h1>
-    <div id="login" class="box">
-      <input id="pass" type="password" placeholder="رمز سایت را وارد کنید" />
-      <button id="btnLogin">ورود</button>
-      <p id="msg" class="muted"></p>
-    </div>
-    <div id="panel" class="hidden">
-      <div class="row">
-        <button id="btnConnect" class="big">اتصال به گوگل</button>
-        <button id="btnLoad" class="big">بارگذاری پیام‌ها</button>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo">ش</div>
+        <div>
+          <h1>گردونه شانس</h1>
+          <p>گردونهٔ رنگی‌ رنگی برای خوشحال‌ کردن جمع — فارسی و ساده</p>
+        </div>
       </div>
-      <ul id="list" class="list"></ul>
-      <button id="btnLogout" class="small">خروج</button>
+      <div class="info">پشتیبانی از ذخیرهٔ محلی · اضافه کردن گزینه · افکت کنفتی</div>
+    </header>
+
+    <main class="container">
+      <section class="panel controls">
+        <h2>افزودن گزینه</h2>
+        <p>یک متن بنویس و روی «اضافه کن» بزن. برای حذف روی ضربدر کنار هر گزینه کلیک کن.</p>
+
+        <div class="add-row">
+          <input id="optInput" type="text" placeholder="مثال: جایزه ۵۰۰٪ یا بلیت 🎟️" />
+          <button id="addBtn" class="btn">اضافه کن</button>
+          <button id="clearBtn" class="btn small">پاک کردن همه</button>
+        </div>
+
+        <div class="options-list" id="optionsList" aria-live="polite"></div>
+
+        <div style="margin-top:14px;display:flex;gap:8px;align-items:center;justify-content:flex-start">
+          <button id="saveBtn" class="btn small">ذخیرهٔ محلی</button>
+          <button id="loadBtn" class="btn small">بارگذاری</button>
+          <button id="exportBtn" class="btn small">دریافت فایل JSON</button>
+        </div>
+      </section>
+
+      <aside class="panel wheel-wrap">
+        <div class="wheel-card">
+          <div class="pointer" title="نشانگر هدف"></div>
+          <canvas id="wheel" width="480" height="480"></canvas>
+
+          <div class="center">
+            <button id="spinBtn" class="start-btn">شروع چرخش</button>
+            <div id="status" class="msg info">آمادهٔ چرخش — گزینه‌ها را اضافه کن</div>
+          </div>
+        </div>
+        <div style="width:520px;max-width:92vw;text-align:center;color:rgba(230,238,248,0.7);font-size:13px">
+          اگر هیچ گزینه‌ای نبود، خطا به رنگ قرمز نشان داده می‌شود.
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <!-- Modal -->
+  <div id="modal" class="modal" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <h3 id="modalTitle">تبریک!</h3>
+      <p id="modalText">شما برنده شدید</p>
+      <button id="closeModal" class="close">بستن</button>
     </div>
-  </main>
+  </div>
+
+  <canvas id="confettiCanvas" style="position:fixed;inset:0;pointer-events:none;z-index:60;display:none"></canvas>
+
   <script src="script.js"></script>
 </body>
 </html>
