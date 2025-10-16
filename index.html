@@ -1,19 +1,72 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <title>گردونه شانس 🎯</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>گردونه شانس — مثل piliapp</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <h1>🎡 گردونه شانس رنگی</h1>
-    <input type="text" id="inputText" placeholder="یه گزینه بنویس...">
-    <button id="addBtn">➕ اضافه کردن گزینه</button>
-    <button id="spinBtn">🎯 شروع چرخش</button>
-    <p id="message"></p>
-    <canvas id="wheel" width="400" height="400"></canvas>
-    <p id="result"></p>
+  <header class="topbar">
+    <h1>🎡 گردونه شانس</h1>
+    <div class="controls-small">
+      <select id="presetSelect">
+        <option value="">پیش‌تنظیم‌ها — انتخاب کن</option>
+        <option value="بله\nخیر">بله / خیر</option>
+        <option value="سیب\nموز\nپرتقال\nانگور">میوه‌ها</option>
+        <option value="قسمت1\nقسمت2\nقسمت3\nقسمت4\nقسمت5">مثال ۵ گزینه‌ای</option>
+      </select>
+      <button id="fullBtn" title="تمام صفحه (F)">⛶</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="leftPanel">
+      <label for="itemsArea">لیست گزینه‌ها (هر خط یک گزینه — حداکثر 100):</label>
+      <textarea id="itemsArea" placeholder="هر خط یک گزینه — مثلاً: برنده ۵۰۰٬۰۰۰" spellcheck="false"></textarea>
+
+      <div class="row">
+        <button id="loadBtn">بارگذاری</button>
+        <button id="saveBtn">ذخیره محلی</button>
+        <button id="importBtn">ورود JSON</button>
+        <button id="exportBtn">صدور JSON</button>
+      </div>
+
+      <div class="row">
+        <button id="clearBtn" class="danger">پاک کردن همه</button>
+        <button id="applyBtn" class="primary">اعمال به گردونه</button>
+      </div>
+
+      <div class="hint">
+        میانبرها: <b>Space</b> = چرخش، <b>R</b> = بازنشانی (Reset)، <b>E</b> = ویرایش (تمرکز textarea)، <b>F</b> = تمام‌صفحه
+      </div>
+    </section>
+
+    <section class="rightPanel">
+      <div class="wheelWrap">
+        <div id="pointer">▼</div>
+        <div id="wheelContainer">
+          <canvas id="wheel" width="600" height="600"></canvas>
+        </div>
+      </div>
+
+      <div class="wheelActions">
+        <button id="spinBtn" class="big primary">شروع چرخش</button>
+        <div id="status" class="status">وضعیت: آماده</div>
+      </div>
+    </section>
+  </main>
+
+  <!-- modal result -->
+  <div id="modal" class="modal" aria-hidden="true">
+    <div class="modalCard">
+      <h2>نتیجه</h2>
+      <p id="modalText"></p>
+      <div class="modalBtns">
+        <button id="closeModal">بستن</button>
+        <button id="repeatSpin" class="primary">دوباره چرخش</button>
+      </div>
+    </div>
   </div>
 
   <script src="script.js"></script>
