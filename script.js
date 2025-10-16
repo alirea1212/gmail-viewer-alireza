@@ -14,12 +14,11 @@ let rotation = 0;
 let spinning = false;
 
 function drawWheel() {
-  const num = options.length;
-  const arc = (2 * Math.PI) / num;
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-
+  const num = options.length;
   if (num === 0) return;
 
+  const arc = (2 * Math.PI) / num;
   for (let i = 0; i < num; i++) {
     const start = i * arc;
     ctx.beginPath();
@@ -37,6 +36,7 @@ function drawWheel() {
     ctx.restore();
   }
 
+  // فلش بالا
   ctx.beginPath();
   ctx.moveTo(200, 0);
   ctx.lineTo(190, 30);
@@ -58,6 +58,8 @@ removeBtn.onclick = () => {
   if (options.length > 0) {
     options.pop();
     drawWheel();
+    message.textContent = "آخرین گزینه حذف شد ❌";
+    setTimeout(() => (message.textContent = ""), 2000);
   } else {
     message.textContent = "هیچ گزینه‌ای برای حذف نیست 😅";
   }
@@ -70,18 +72,19 @@ spinBtn.onclick = () => {
     return;
   }
 
-  message.textContent = "";
   spinning = true;
+  message.textContent = "";
   result.textContent = "";
 
+  // صدای چرخیدن
   spinSound.currentTime = 0;
   spinSound.play();
 
   const randomExtra = Math.random() * 360;
-  const spin = 3600 + randomExtra; // حداقل 10 دور کامل
+  const spin = 3600 + randomExtra; // 10 دور کامل به بالا
   rotation = (rotation + spin) % 360;
 
-  canvas.style.transition = "transform 10s cubic-bezier(0.1, 0.85, 0.25, 1)";
+  canvas.style.transition = "transform 10s cubic-bezier(0.08, 0.85, 0.2, 1)";
   canvas.style.transform = `rotate(${rotation}deg)`;
 
   setTimeout(() => {
@@ -91,7 +94,7 @@ spinBtn.onclick = () => {
 
     const index = Math.floor(((360 - (rotation % 360)) / 360) * options.length) % options.length;
     result.textContent = `🎉 برنده: ${options[index]} 🎊`;
-  }, 10000);
+  }, 10000); // دقیقاً 10 ثانیه
 };
 
 drawWheel();
