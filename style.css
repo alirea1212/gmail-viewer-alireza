@@ -1,16 +1,15 @@
 body {
-  background: radial-gradient(circle at center, #ffb3c6, #a1c4fd, #c2e9fb);
-  background-size: 200% 200%;
-  animation: bgMove 10s infinite alternate;
-  font-family: 'Vazirmatn', sans-serif;
-  color: #222;
+  background: linear-gradient(135deg, #fcb045, #fd1d1d, #833ab4);
+  background-size: 400% 400%;
+  animation: bg 10s infinite alternate;
+  font-family: "Vazirmatn", sans-serif;
   text-align: center;
-  overflow-x: hidden;
+  color: #fff;
 }
 
-@keyframes bgMove {
-  0% { background-position: 0% 0%; }
-  100% { background-position: 100% 100%; }
+@keyframes bg {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
 }
 
 .container {
@@ -28,8 +27,9 @@ input, button {
 input {
   width: 220px;
   outline: none;
-  border: 2px solid #fff;
-  background: rgba(255, 255, 255, 0.7);
+  border: 2px solid white;
+  background: rgba(255, 255, 255, 0.8);
+  color: #333;
 }
 
 button {
@@ -48,20 +48,20 @@ button:hover {
 canvas {
   margin-top: 30px;
   border-radius: 50%;
-  border: 5px solid white;
-  box-shadow: 0 0 30px rgba(0,0,0,0.3);
-  transition: transform 10s cubic-bezier(0.1, 0.85, 0.25, 1);
+  border: 6px solid white;
+  box-shadow: 0 0 30px rgba(0,0,0,0.4);
+  transition: transform 10s cubic-bezier(0.08, 0.85, 0.2, 1);
 }
 
 #message {
-  color: red;
+  color: yellow;
   font-weight: bold;
   margin-top: 10px;
 }
 
 #result {
-  font-size: 20px;
+  font-size: 22px;
   font-weight: bold;
+  color: #fff;
   margin-top: 10px;
-  color: #2f3542;
 }
