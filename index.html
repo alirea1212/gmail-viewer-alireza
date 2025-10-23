@@ -1,25 +1,51 @@
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<!doctype html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>🎡 گردونه شانس حرفه‌ای علیرضا</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Iran Time — Live Clock</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="container">
-    <h1>🎯 گردونه شانس حرفه‌ای</h1>
-    <input type="text" id="inputText" placeholder="یه گزینه بنویس...">
-    <button id="addBtn">➕ اضافه کردن گزینه</button>
-    <button id="removeBtn">🗑️ حذف آخرین گزینه</button>
-    <button id="spinBtn">🎰 شروع چرخش</button>
-    <p id="message"></p>
-    <canvas id="wheel" width="400" height="400"></canvas>
-    <p id="result"></p>
-  </div>
+  <main class="wrap">
+    <header class="head">
+      <div class="brand-dot" aria-hidden="true"></div>
+      <h1>Iran Time</h1>
+      <p class="sub">Live date & time in Asia/Tehran</p>
+    </header>
 
-  <!-- صداها -->
-  <audio id="spinSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_3b29f947b0.mp3?filename=wheel-spin-112941.mp3"></audio>
-  <audio id="winSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_713dc62db9.mp3?filename=success-1-6297.mp3"></audio>
+    <section class="card">
+      <div id="clock" class="clock" aria-live="polite">--:--:--</div>
+      <div class="rows">
+        <div class="row">
+          <span class="label">Gregorian:</span>
+          <span id="dateGreg" class="value">Loading…</span>
+        </div>
+        <div class="row">
+          <span class="label">Persian (Jalali):</span>
+          <span id="datePersian" class="value">Loading…</span>
+        </div>
+        <div class="row">
+          <span class="label">Time zone:</span>
+          <span id="tz" class="value">Loading…</span>
+        </div>
+        <div class="row">
+          <span class="label">ISO-8601:</span>
+          <span id="iso" class="value mono">Loading…</span>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button id="copyIso" class="btn" type="button">Copy ISO</button>
+        <button id="copyTime" class="btn ghost" type="button">Copy Time</button>
+      </div>
+      <div id="copied" class="copied" role="status" aria-live="polite"></div>
+    </section>
+
+    <footer class="foot">
+      <span>Source: device clock converted to Asia/Tehran.</span>
+    </footer>
+  </main>
 
   <script src="script.js"></script>
 </body>
