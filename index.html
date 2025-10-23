@@ -3,47 +3,91 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Iran Time — Live Clock</title>
+  <title>Iran Time — Beautiful Live Clock</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <main class="wrap">
-    <header class="head">
-      <div class="brand-dot" aria-hidden="true"></div>
-      <h1>Iran Time</h1>
-      <p class="sub">Live date & time in Asia/Tehran</p>
+  <!-- Animated RGB Background -->
+  <div class="bg"></div>
+  <div class="bg blur"></div>
+
+  <main class="page">
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo"></div>
+        <h1>Iran Time</h1>
+      </div>
+      <nav class="actions">
+        <button id="copyIso" class="btn">Copy ISO</button>
+        <button id="copyTime" class="btn ghost">Copy Time</button>
+      </nav>
     </header>
 
-    <section class="card">
-      <div id="clock" class="clock" aria-live="polite">--:--:--</div>
-      <div class="rows">
-        <div class="row">
-          <span class="label">Gregorian:</span>
-          <span id="dateGreg" class="value">Loading…</span>
-        </div>
-        <div class="row">
-          <span class="label">Persian (Jalali):</span>
-          <span id="datePersian" class="value">Loading…</span>
-        </div>
-        <div class="row">
-          <span class="label">Time zone:</span>
-          <span id="tz" class="value">Loading…</span>
-        </div>
-        <div class="row">
-          <span class="label">ISO-8601:</span>
-          <span id="iso" class="value mono">Loading…</span>
+    <!-- Hero Clock Card -->
+    <section class="hero card">
+      <div class="clock-wrap">
+        <!-- 12-segment chroma ring -->
+        <div class="dial ring">
+          <div class="dial glass"></div>
+          <!-- ticks -->
+          <div class="ticks">
+            <span style="--i:0"></span><span style="--i:1"></span><span style="--i:2"></span>
+            <span style="--i:3"></span><span style="--i:4"></span><span style="--i:5"></span>
+            <span style="--i:6"></span><span style="--i:7"></span><span style="--i:8"></span>
+            <span style="--i:9"></span><span style="--i:10"></span><span style="--i:11"></span>
+          </div>
+          <!-- center hub -->
+          <div class="hub"></div>
+          <!-- single sweeping hand -->
+          <div id="hand" class="hand"></div>
         </div>
       </div>
 
-      <div class="actions">
-        <button id="copyIso" class="btn" type="button">Copy ISO</button>
-        <button id="copyTime" class="btn ghost" type="button">Copy Time</button>
+      <div class="readouts">
+        <div class="digital">
+          <div id="clock" class="time">--:--:--</div>
+          <div class="tz">
+            <span id="tz">UTC+03:30 (Asia/Tehran)</span>
+          </div>
+        </div>
+
+        <div class="info-grid">
+          <div class="info">
+            <div class="label">Gregorian</div>
+            <div id="dateGreg" class="value">Loading…</div>
+          </div>
+          <div class="info">
+            <div class="label">Persian (Jalali)</div>
+            <div id="datePersian" class="value">Loading…</div>
+          </div>
+          <div class="info wide">
+            <div class="label">ISO-8601</div>
+            <div id="iso" class="value mono">Loading…</div>
+          </div>
+        </div>
+
+        <div id="copied" class="copied" role="status" aria-live="polite"></div>
       </div>
-      <div id="copied" class="copied" role="status" aria-live="polite"></div>
+    </section>
+
+    <!-- Stylish extras -->
+    <section class="cards">
+      <article class="mini card">
+        <h3>Accurate</h3>
+        <p>Uses your device clock converted to Asia/Tehran with DST-awareness.</p>
+      </article>
+      <article class="mini card">
+        <h3>Dual Calendar</h3>
+        <p>Shows both Gregorian and Persian (Jalali) dates with locale formatting.</p>
+      </article>
+      <article class="mini card">
+        <h3>Copy Friendly</h3>
+        <p>Grab the ISO timestamp or the time text in a click.</p>
+      </article>
     </section>
 
     <footer class="foot">
-      <span>Source: device clock converted to Asia/Tehran.</span>
+      <span>© <span id="year"></span> Iran Time — Beautiful live clock for Asia/Tehran.</span>
     </footer>
   </main>
 
