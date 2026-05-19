@@ -1,219 +1,129 @@
-/* تنظیمات پایه و متغیرهای رنگی */
-:root {
-    --primary-color: #00ff88;
-    --bg-dark: #0a0a0a;
-    --glass-bg: rgba(20, 20, 20, 0.7);
-    --glass-border: rgba(255, 255, 255, 0.1);
-    --text-light: #e0e0e0;
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Vazirmatn',sans-serif;
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+body{
+background:#0f172a;
+color:white;
+overflow-x:hidden;
+min-height:100vh;
 }
 
-body {
-    background-color: var(--bg-dark);
-    color: var(--text-light);
-    overflow-x: hidden;
-    min-height: 100vh;
+.background{
+position:fixed;
+width:100%;
+height:100%;
+background:
+radial-gradient(circle at top left,#1e3a8a,transparent),
+radial-gradient(circle at bottom right,#7c3aed,transparent);
+z-index:-1;
+filter:blur(100px);
 }
 
-/* پس‌زمینه گرافیکی و متحرک */
-.background-animation {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: radial-gradient(circle at 50% 50%, #1a1a2e 0%, #000000 100%);
-    z-index: -1;
+header{
+text-align:center;
+padding:40px;
 }
 
-.background-animation::before {
-    content: '';
-    position: absolute;
-    width: 200%;
-    height: 200%;
-    background-image: linear-gradient(rgba(0, 255, 136, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 255, 136, 0.05) 1px, transparent 1px);
-    background-size: 40px 40px;
-    transform: perspective(500px) rotateX(60deg) translateY(-100px) translateZ(-200px);
-    animation: gridMove 10s linear infinite;
+header h1{
+font-size:60px;
+font-weight:900;
+margin-bottom:10px;
+background:linear-gradient(90deg,#60a5fa,#c084fc);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
 }
 
-@keyframes gridMove {
-    0% { transform: perspective(500px) rotateX(60deg) translateY(0); }
-    100% { transform: perspective(500px) rotateX(60deg) translateY(40px); }
+header p{
+font-size:20px;
+opacity:0.8;
 }
 
-/* کلاس‌های کنترل نمایش */
-.hidden {
-    display: none !important;
+.tools-container{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:25px;
+padding:40px;
 }
 
-/* --- استایل بخش ورود (Login) --- */
-#login-section {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    transition: opacity 0.5s ease;
+.card{
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(15px);
+border:1px solid rgba(255,255,255,0.1);
+border-radius:25px;
+padding:25px;
+transition:0.4s;
+box-shadow:0 0 25px rgba(0,0,0,0.3);
 }
 
-.login-box {
-    background: var(--glass-bg);
-    backdrop-filter: blur(15px);
-    border: 1px solid var(--glass-border);
-    padding: 40px;
-    border-radius: 20px;
-    text-align: center;
-    width: 90%;
-    max-width: 400px;
-    box-shadow: 0 0 30px rgba(0, 255, 136, 0.1);
-    animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+.card:hover{
+transform:translateY(-10px) scale(1.03);
+box-shadow:0 0 40px rgba(96,165,250,0.5);
 }
 
-.lock-icon {
-    font-size: 40px;
-    color: var(--primary-color);
-    margin-bottom: 20px;
-    filter: drop-shadow(0 0 10px var(--primary-color));
+.card h2{
+margin-bottom:20px;
+font-size:24px;
 }
 
-.login-box h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
+button{
+padding:12px 20px;
+border:none;
+border-radius:15px;
+background:linear-gradient(45deg,#3b82f6,#8b5cf6);
+color:white;
+font-size:16px;
+cursor:pointer;
+transition:0.3s;
+margin-top:10px;
 }
 
-.login-box p {
-    font-size: 14px;
-    color: #a0a0a0;
-    margin-bottom: 25px;
+button:hover{
+transform:scale(1.08);
 }
 
-.input-group {
-    display: flex;
-    gap: 10px;
+input{
+width:100%;
+padding:12px;
+border:none;
+border-radius:12px;
+margin-bottom:10px;
+background:rgba(255,255,255,0.1);
+color:white;
+font-size:16px;
 }
 
-.input-group input {
-    flex: 1;
-    background: rgba(0, 0, 0, 0.5);
-    border: 1px solid var(--primary-color);
-    color: white;
-    padding: 12px 15px;
-    border-radius: 8px;
-    outline: none;
-    font-size: 16px;
-    transition: box-shadow 0.3s ease;
+#clock{
+font-size:35px;
+font-weight:bold;
+color:#60a5fa;
 }
 
-.input-group input:focus {
-    box-shadow: 0 0 15px rgba(0, 255, 136, 0.3);
+.dark{
+background:#ffffff;
+color:black;
 }
 
-.input-group button {
-    background: var(--primary-color);
-    color: #000;
-    border: none;
-    padding: 0 20px;
-    border-radius: 8px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
+.dark .card{
+background:rgba(0,0,0,0.1);
+color:black;
 }
 
-.input-group button:hover {
-    background: #00cc6a;
-    box-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+.dark input{
+color:black;
 }
 
-#error-message {
-    color: #ff3366;
-    margin-top: 15px;
-    font-size: 13px;
-    font-weight: bold;
-    margin-bottom: 0;
+@media(max-width:700px){
+
+header h1{
+font-size:40px;
 }
 
-/* --- استایل محتوای اصلی --- */
-#main-content {
-    padding: 50px 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-    animation: fadeIn 1s ease forwards;
+.tools-container{
+padding:20px;
 }
 
-.hero-section {
-    text-align: center;
-    margin-bottom: 60px;
-}
-
-.glitch {
-    font-size: 3rem;
-    font-weight: 900;
-    text-transform: uppercase;
-    position: relative;
-    color: var(--primary-color);
-    text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
-}
-
-.subtitle {
-    font-size: 1.2rem;
-    color: #b0b0b0;
-    margin-top: 10px;
-}
-
-.cards-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-}
-
-.feature-card {
-    background: linear-gradient(145deg, rgba(30, 30, 30, 0.6), rgba(15, 15, 15, 0.9));
-    border: 1px solid var(--glass-border);
-    border-radius: 15px;
-    padding: 30px;
-    text-align: right;
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-    backdrop-filter: blur(10px);
-}
-
-.feature-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 30px rgba(0, 255, 136, 0.15);
-    border-color: rgba(0, 255, 136, 0.3);
-}
-
-.card-icon {
-    font-size: 2.5rem;
-    color: var(--primary-color);
-    margin-bottom: 20px;
-}
-
-.feature-card h3 {
-    font-size: 1.5rem;
-    margin-bottom: 15px;
-    color: #fff;
-}
-
-.feature-card p {
-    color: #aaaaaa;
-    line-height: 1.8;
-    font-size: 0.95rem;
-}
-
-/* انیمیشن‌ها */
-@keyframes popIn {
-    0% { transform: scale(0.8); opacity: 0; }
-    100% { transform: scale(1); opacity: 1; }
-}
-
-@keyframes fadeIn {
-    0% { opacity: 0; transform: translateY(20px); }
-    100% { opacity: 1; transform: translateY(0); }
 }
