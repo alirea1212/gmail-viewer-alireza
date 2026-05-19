@@ -3,21 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>علی مکانیک | خدمات تخصصی دوچرخه</title>
-    <!-- اتصال فایل CSS -->
+    <title>پروژه فوق‌سری | علی مکانیک و حنانه</title>
     <link rel="stylesheet" href="style.css">
+    <!-- اضافه کردن آیکون‌های حرفه‌ای -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <div class="container">
-        <h1>سلام! من علی مکانیک هستم 🚲</h1>
-        <p>متخصص تعمیر ترمز V-Brake و رکورددار تک‌چرخ (۱۰ ثانیه!)</p>
-        
-        <button id="actionBtn">نمایش مهارت‌های من</button>
-        
-        <p id="resultText"></p>
+
+    <!-- پس‌زمینه متحرک -->
+    <div class="background-animation"></div>
+
+    <!-- صفحه ورود (Login) -->
+    <div id="login-section" class="glass-panel active">
+        <div class="login-box">
+            <i class="fa-solid fa-lock lock-icon"></i>
+            <h2>سیستم امنیتی</h2>
+            <p>برای دسترسی به اطلاعات طبقه‌بندی شده، رمز عبور را وارد کنید.</p>
+            <div class="input-group">
+                <input type="password" id="password-input" placeholder="رمز عبور..." autocomplete="off">
+                <button id="login-btn"><i class="fa-solid fa-arrow-left"></i> ورود</button>
+            </div>
+            <p id="error-message" class="hidden">اخطار: رمز عبور نامعتبر است!</p>
+        </div>
     </div>
 
-    <!-- اتصال فایل جاوا اسکریپت (همیشه در انتهای body قرار می‌گیرد) -->
+    <!-- محتوای اصلی سایت (بعد از ورود نمایش داده می‌شود) -->
+    <main id="main-content" class="hidden">
+        <header class="hero-section">
+            <h1 class="glitch" data-text="پایگاه داده علی مکانیک">پایگاه داده علی مکانیک</h1>
+            <p class="subtitle">تیمی متخصص با حضور حنانه، آماده برای شکستن مرزهای هیجان</p>
+        </header>
+
+        <section class="cards-container">
+            <!-- کارت اول: حنانه -->
+            <div class="feature-card">
+                <div class="card-icon"><i class="fa-solid fa-star"></i></div>
+                <h3>حنانه</h3>
+                <p>بخش کلیدی تیم. همکاری در برنامه‌ریزی مسابقات، هماهنگی‌های پیست پارک و استراتژی‌های جدید برای پیشرفت در تکنیک‌های دوچرخه‌سواری و ثبت رکوردهای تیمی.</p>
+            </div>
+
+            <!-- کارت دوم: تک‌چرخ -->
+            <div class="feature-card">
+                <div class="card-icon"><i class="fa-solid fa-motorcycle"></i></div>
+                <h3>استادی در تک‌چرخ</h3>
+                <p>کنترل مطلق روی تعادل! ثبت رکورد طلایی ۱۰ ثانیه تک‌چرخ بدون نقص. تسلط کامل بر مرکز ثقل دوچرخه در سرعت‌های مختلف.</p>
+            </div>
+
+            <!-- کارت سوم: مکانیک حرفه‌ای -->
+            <div class="feature-card">
+                <div class="card-icon"><i class="fa-solid fa-wrench"></i></div>
+                <h3>جادوی مکانیک</h3>
+                <p>متخصص سیستم‌های ترمز V-Brake. توانایی باز کردن سرسخت‌ترین پیچ‌های آلن و تنظیم میلی‌متری لنت‌ها با پیچ‌گوشتی و انبردست برای مسابقات سنگین دوترکه.</p>
+            </div>
+        </section>
+    </main>
+
     <script src="script.js"></script>
 </body>
 </html>
