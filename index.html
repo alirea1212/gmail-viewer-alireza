@@ -1,63 +1,141 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="fa">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>پروژه فوق‌سری | علی مکانیک و حنانه</title>
-    <link rel="stylesheet" href="style.css">
-    <!-- اضافه کردن آیکون‌های حرفه‌ای -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UltraTools</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;700;900&display=swap" rel="stylesheet">
+
 </head>
+
 <body>
 
-    <!-- پس‌زمینه متحرک -->
-    <div class="background-animation"></div>
+<div class="background"></div>
 
-    <!-- صفحه ورود (Login) -->
-    <div id="login-section" class="glass-panel active">
-        <div class="login-box">
-            <i class="fa-solid fa-lock lock-icon"></i>
-            <h2>سیستم امنیتی</h2>
-            <p>برای دسترسی به اطلاعات طبقه‌بندی شده، رمز عبور را وارد کنید.</p>
-            <div class="input-group">
-                <input type="password" id="password-input" placeholder="رمز عبور..." autocomplete="off">
-                <button id="login-btn"><i class="fa-solid fa-arrow-left"></i> ورود</button>
-            </div>
-            <p id="error-message" class="hidden">اخطار: رمز عبور نامعتبر است!</p>
-        </div>
-    </div>
+<header>
 
-    <!-- محتوای اصلی سایت (بعد از ورود نمایش داده می‌شود) -->
-    <main id="main-content" class="hidden">
-        <header class="hero-section">
-            <h1 class="glitch" data-text="پایگاه داده علی مکانیک">پایگاه داده علی مکانیک</h1>
-            <p class="subtitle">تیمی متخصص با حضور حنانه، آماده برای شکستن مرزهای هیجان</p>
-        </header>
+<h1>🚀 Ultra Tools</h1>
 
-        <section class="cards-container">
-            <!-- کارت اول: حنانه -->
-            <div class="feature-card">
-                <div class="card-icon"><i class="fa-solid fa-star"></i></div>
-                <h3>حنانه</h3>
-                <p>بخش کلیدی تیم. همکاری در برنامه‌ریزی مسابقات، هماهنگی‌های پیست پارک و استراتژی‌های جدید برای پیشرفت در تکنیک‌های دوچرخه‌سواری و ثبت رکوردهای تیمی.</p>
-            </div>
+<p>
+مجموعه ابزار های حرفه ای و کاربردی
+</p>
 
-            <!-- کارت دوم: تک‌چرخ -->
-            <div class="feature-card">
-                <div class="card-icon"><i class="fa-solid fa-motorcycle"></i></div>
-                <h3>استادی در تک‌چرخ</h3>
-                <p>کنترل مطلق روی تعادل! ثبت رکورد طلایی ۱۰ ثانیه تک‌چرخ بدون نقص. تسلط کامل بر مرکز ثقل دوچرخه در سرعت‌های مختلف.</p>
-            </div>
+</header>
 
-            <!-- کارت سوم: مکانیک حرفه‌ای -->
-            <div class="feature-card">
-                <div class="card-icon"><i class="fa-solid fa-wrench"></i></div>
-                <h3>جادوی مکانیک</h3>
-                <p>متخصص سیستم‌های ترمز V-Brake. توانایی باز کردن سرسخت‌ترین پیچ‌های آلن و تنظیم میلی‌متری لنت‌ها با پیچ‌گوشتی و انبردست برای مسابقات سنگین دوترکه.</p>
-            </div>
-        </section>
-    </main>
+<section class="tools-container">
 
-    <script src="script.js"></script>
+<div class="card">
+<h2>🕒 ساعت ایران</h2>
+<div id="clock"></div>
+</div>
+
+<div class="card">
+<h2>🧮 ماشین حساب</h2>
+
+<input type="number" id="num1" placeholder="عدد اول">
+
+<input type="number" id="num2" placeholder="عدد دوم">
+
+<button onclick="calculate()">جمع</button>
+
+<div id="calcResult"></div>
+
+</div>
+
+<div class="card">
+<h2>🌡️ تبدیل دما</h2>
+
+<input type="number" id="temp">
+
+<button onclick="convertTemp()">
+تبدیل به فارنهایت
+</button>
+
+<div id="tempResult"></div>
+
+</div>
+
+<div class="card">
+<h2>📅 تاریخ امروز</h2>
+
+<div id="date"></div>
+
+</div>
+
+<div class="card">
+<h2>🎲 عدد تصادفی</h2>
+
+<button onclick="randomNumber()">
+تولید کن
+</button>
+
+<div id="randomResult"></div>
+
+</div>
+
+<div class="card">
+<h2>💡 نقل قول انگیزشی</h2>
+
+<button onclick="quoteGenerator()">
+نمایش
+</button>
+
+<div id="quote"></div>
+
+</div>
+
+<div class="card">
+<h2>🌙 دارک مود</h2>
+
+<button onclick="toggleMode()">
+تغییر حالت
+</button>
+
+</div>
+
+<div class="card">
+<h2>📏 تبدیل متر به سانتی متر</h2>
+
+<input type="number" id="meter">
+
+<button onclick="convertMeter()">
+تبدیل
+</button>
+
+<div id="meterResult"></div>
+
+</div>
+
+<div class="card">
+<h2>⌛ تایمر</h2>
+
+<input type="number" id="seconds" placeholder="ثانیه">
+
+<button onclick="startTimer()">
+شروع
+</button>
+
+<div id="timer"></div>
+
+</div>
+
+<div class="card">
+<h2>🔋 درصد باتری</h2>
+
+<button onclick="batteryInfo()">
+نمایش
+</button>
+
+<div id="battery"></div>
+
+</div>
+
+</section>
+
+<script src="script.js"></script>
+
 </body>
 </html>
