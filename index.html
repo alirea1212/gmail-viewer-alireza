@@ -1,96 +1,23 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Iran Time — Beautiful Live Clock</title>
-  <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>علی مکانیک | خدمات تخصصی دوچرخه</title>
+    <!-- اتصال فایل CSS -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Animated RGB Background -->
-  <div class="bg"></div>
-  <div class="bg blur"></div>
+    <div class="container">
+        <h1>سلام! من علی مکانیک هستم 🚲</h1>
+        <p>متخصص تعمیر ترمز V-Brake و رکورددار تک‌چرخ (۱۰ ثانیه!)</p>
+        
+        <button id="actionBtn">نمایش مهارت‌های من</button>
+        
+        <p id="resultText"></p>
+    </div>
 
-  <main class="page">
-    <header class="topbar">
-      <div class="brand">
-        <div class="logo"></div>
-        <h1>Iran Time</h1>
-      </div>
-      <nav class="actions">
-        <button id="copyIso" class="btn">Copy ISO</button>
-        <button id="copyTime" class="btn ghost">Copy Time</button>
-      </nav>
-    </header>
-
-    <!-- Hero Clock Card -->
-    <section class="hero card">
-      <div class="clock-wrap">
-        <!-- 12-segment chroma ring -->
-        <div class="dial ring">
-          <div class="dial glass"></div>
-          <!-- ticks -->
-          <div class="ticks">
-            <span style="--i:0"></span><span style="--i:1"></span><span style="--i:2"></span>
-            <span style="--i:3"></span><span style="--i:4"></span><span style="--i:5"></span>
-            <span style="--i:6"></span><span style="--i:7"></span><span style="--i:8"></span>
-            <span style="--i:9"></span><span style="--i:10"></span><span style="--i:11"></span>
-          </div>
-          <!-- center hub -->
-          <div class="hub"></div>
-          <!-- single sweeping hand -->
-          <div id="hand" class="hand"></div>
-        </div>
-      </div>
-
-      <div class="readouts">
-        <div class="digital">
-          <div id="clock" class="time">--:--:--</div>
-          <div class="tz">
-            <span id="tz">UTC+03:30 (Asia/Tehran)</span>
-          </div>
-        </div>
-
-        <div class="info-grid">
-          <div class="info">
-            <div class="label">Gregorian</div>
-            <div id="dateGreg" class="value">Loading…</div>
-          </div>
-          <div class="info">
-            <div class="label">Persian (Jalali)</div>
-            <div id="datePersian" class="value">Loading…</div>
-          </div>
-          <div class="info wide">
-            <div class="label">ISO-8601</div>
-            <div id="iso" class="value mono">Loading…</div>
-          </div>
-        </div>
-
-        <div id="copied" class="copied" role="status" aria-live="polite"></div>
-      </div>
-    </section>
-
-    <!-- Stylish extras -->
-    <section class="cards">
-      <article class="mini card">
-        <h3>Accurate</h3>
-        <p>Uses your device clock converted to Asia/Tehran with DST-awareness.</p>
-      </article>
-      <article class="mini card">
-        <h3>Dual Calendar</h3>
-        <p>Shows both Gregorian and Persian (Jalali) dates with locale formatting.</p>
-      </article>
-      <article class="mini card">
-        <h3>Copy Friendly</h3>
-        <p>Grab the ISO timestamp or the time text in a click.</p>
-      </article>
-    </section>
-
-    <footer class="foot">
-      <span>© <span id="year"></span> Iran Time — Beautiful live clock for Asia/Tehran.</span>
-    </footer>
-  </main>
-
-  <script src="script.js"></script>
+    <!-- اتصال فایل جاوا اسکریپت (همیشه در انتهای body قرار می‌گیرد) -->
+    <script src="script.js"></script>
 </body>
 </html>
