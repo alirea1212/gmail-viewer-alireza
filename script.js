@@ -1,163 +1,127 @@
-function updateClock(){
+const mobileBtn = document.getElementById("mobileBtn");
+const pcBtn = document.getElementById("pcBtn");
 
-let now = new Date()
+const deviceSelect = document.querySelector(".device-select");
+const mainPanel = document.querySelector(".main-panel");
 
-let time = now.toLocaleTimeString('fa-IR')
+const countries = document.querySelectorAll(".country");
 
-document.getElementById('clock').innerHTML = time
+const startTest = document.getElementById("startTest");
 
-}
+const dnsList = document.getElementById("dnsList");
 
-setInterval(updateClock,1000)
+const workingCount = document.getElementById("workingCount");
+const deadCount = document.getElementById("deadCount");
+const bestPing = document.getElementById("bestPing");
 
-updateClock()
+let selectedCountry = "Germany";
 
+let working = 0;
+let dead = 0;
+let best = 999;
 
+mobileBtn.onclick = () => {
 
-let today = new Date()
+    deviceSelect.classList.add("hidden");
+    mainPanel.classList.remove("hidden");
 
-document.getElementById('date').innerHTML =
-today.toLocaleDateString('fa-IR')
-
-
-
-function calculate(){
-
-let n1 =
-parseFloat(document.getElementById('num1').value)
-
-let n2 =
-parseFloat(document.getElementById('num2').value)
-
-let result = n1 + n2
-
-document.getElementById('calcResult').innerHTML =
-"نتیجه : " + result
+    document.body.style.background = "#020617";
 
 }
 
+pcBtn.onclick = () => {
 
+    deviceSelect.classList.add("hidden");
+    mainPanel.classList.remove("hidden");
 
-function convertTemp(){
-
-let c =
-document.getElementById('temp').value
-
-let f = (c * 9/5) + 32
-
-document.getElementById('tempResult').innerHTML =
-f + " °F"
+    document.body.style.background = "#040b1a";
 
 }
 
+countries.forEach(btn => {
 
+    btn.onclick = () => {
 
-function randomNumber(){
+        countries.forEach(b => b.classList.remove("active"));
 
-let rand =
-Math.floor(Math.random() * 1000)
+        btn.classList.add("active");
 
-document.getElementById('randomResult').innerHTML =
-rand
+        selectedCountry = btn.dataset.country;
 
-}
+    }
 
+});
 
+function generateDNS(){
 
-function quoteGenerator(){
-
-let quotes = [
-
-"موفقیت از تلاش ساخته میشود",
-
-"هیچ چیز غیر ممکن نیست",
-
-"قوی باش",
-
-"امروز بهتر از دیروز باش",
-
-"تو میتوانی"
-
-]
-
-let random =
-quotes[Math.floor(Math.random()*quotes.length)]
-
-document.getElementById('quote').innerHTML =
-random
+    return `${Math.floor(Math.random()*255)}.${Math.floor(Math.random()*255)}.${Math.floor(Math.random()*255)}.${Math.floor(Math.random()*255)}`;
 
 }
 
+function simulatePing(){
 
-
-function toggleMode(){
-
-document.body.classList.toggle('dark')
+    return Math.floor(Math.random()*200);
 
 }
 
+startTest.onclick = async () => {
 
+    dnsList.innerHTML = "";
 
-function convertMeter(){
+    working = 0;
+    dead = 0;
+    best = 999;
 
-let meter =
-document.getElementById('meter').value
+    for(let i=0;i<200;i++){
 
-let result = meter * 100
+        let dns = generateDNS();
 
-document.getElementById('meterResult').innerHTML =
-result + " سانتی متر"
+        let ping = simulatePing();
 
-}
+        let isGood = ping < 120;
 
+        if(isGood){
+            working++;
+        }else{
+            dead++;
+        }
 
+        if(ping < best){
+            best = ping;
+        }
 
-function startTimer(){
+        workingCount.innerText = working;
+        deadCount.innerText = dead;
+        bestPing.innerText = best + " ms";
 
-let seconds =
-document.getElementById('seconds').value
+        let div = document.createElement("div");
 
-let timer =
-setInterval(function(){
+        div.classList.add("dns-item");
 
-seconds--
+        if(isGood){
+            div.classList.add("good");
+        }else{
+            div.classList.add("bad");
+        }
 
-document.getElementById('timer').innerHTML =
-seconds + " ثانیه"
+        div.innerHTML = `
+        
+        <h3>${selectedCountry} DNS</h3>
 
-if(seconds <= 0){
+        <p>${dns}</p>
 
-clearInterval(timer)
+        <div class="ping">Ping: ${ping} ms</div>
 
-document.getElementById('timer').innerHTML =
-"تمام شد"
+        <div class="status">
+        ${isGood ? "🟢 WORKING" : "🔴 DEAD"}
+        </div>
 
-}
+        `;
 
-},1000)
+        dnsList.appendChild(div);
 
-}
+        await new Promise(resolve => setTimeout(resolve,30));
 
-
-
-async function batteryInfo(){
-
-if(navigator.getBattery){
-
-let battery =
-await navigator.getBattery()
-
-let level =
-battery.level * 100
-
-document.getElementById('battery').innerHTML =
-level + "%"
-
-}else{
-
-document.getElementById('battery').innerHTML =
-"مرورگر پشتیبانی نمیکند"
-
-}
+    }
 
 }
