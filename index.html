@@ -1,139 +1,79 @@
 <!DOCTYPE html>
-<html lang="fa">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>UltraTools</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI DNS Generator</title>
 
-<link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
 
-<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;700;900&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
 </head>
-
 <body>
 
-<div class="background"></div>
+<div class="background-grid"></div>
 
 <header>
-
-<h1>🚀 Ultra Tools</h1>
-
-<p>
-مجموعه ابزار های حرفه ای و کاربردی
-</p>
-
+    <h1>Create by Alireza-Namdar + AI</h1>
+    <p class="subtitle">Smart Gaming DNS Generator System</p>
 </header>
 
-<section class="tools-container">
+<div class="device-select">
 
-<div class="card">
-<h2>🕒 ساعت ایران</h2>
-<div id="clock"></div>
-</div>
+    <h2>Select Device</h2>
 
-<div class="card">
-<h2>🧮 ماشین حساب</h2>
-
-<input type="number" id="num1" placeholder="عدد اول">
-
-<input type="number" id="num2" placeholder="عدد دوم">
-
-<button onclick="calculate()">جمع</button>
-
-<div id="calcResult"></div>
+    <div class="device-buttons">
+        <button id="mobileBtn">📱 Mobile</button>
+        <button id="pcBtn">🖥 PC</button>
+    </div>
 
 </div>
 
-<div class="card">
-<h2>🌡️ تبدیل دما</h2>
+<div class="main-panel hidden">
 
-<input type="number" id="temp">
+    <div class="country-panel">
 
-<button onclick="convertTemp()">
-تبدیل به فارنهایت
-</button>
+        <h2>Select Country</h2>
 
-<div id="tempResult"></div>
+        <div class="countries">
 
-</div>
+            <button class="country" data-country="Germany">🇩🇪 Germany</button>
+            <button class="country" data-country="Turkey">🇹🇷 Turkey</button>
+            <button class="country" data-country="India">🇮🇳 India</button>
+            <button class="country" data-country="UAE">🇦🇪 UAE</button>
 
-<div class="card">
-<h2>📅 تاریخ امروز</h2>
+        </div>
 
-<div id="date"></div>
+    </div>
 
-</div>
+    <div class="control-panel">
 
-<div class="card">
-<h2>🎲 عدد تصادفی</h2>
+        <button id="startTest">⚡ Start Smart Scan</button>
 
-<button onclick="randomNumber()">
-تولید کن
-</button>
+    </div>
 
-<div id="randomResult"></div>
+    <div class="stats">
 
-</div>
+        <div class="card">
+            <h3>Working DNS</h3>
+            <span id="workingCount">0</span>
+        </div>
 
-<div class="card">
-<h2>💡 نقل قول انگیزشی</h2>
+        <div class="card">
+            <h3>Dead DNS</h3>
+            <span id="deadCount">0</span>
+        </div>
 
-<button onclick="quoteGenerator()">
-نمایش
-</button>
+        <div class="card">
+            <h3>Best Ping</h3>
+            <span id="bestPing">0 ms</span>
+        </div>
 
-<div id="quote"></div>
+    </div>
 
-</div>
-
-<div class="card">
-<h2>🌙 دارک مود</h2>
-
-<button onclick="toggleMode()">
-تغییر حالت
-</button>
+    <div class="dns-list" id="dnsList"></div>
 
 </div>
-
-<div class="card">
-<h2>📏 تبدیل متر به سانتی متر</h2>
-
-<input type="number" id="meter">
-
-<button onclick="convertMeter()">
-تبدیل
-</button>
-
-<div id="meterResult"></div>
-
-</div>
-
-<div class="card">
-<h2>⌛ تایمر</h2>
-
-<input type="number" id="seconds" placeholder="ثانیه">
-
-<button onclick="startTimer()">
-شروع
-</button>
-
-<div id="timer"></div>
-
-</div>
-
-<div class="card">
-<h2>🔋 درصد باتری</h2>
-
-<button onclick="batteryInfo()">
-نمایش
-</button>
-
-<div id="battery"></div>
-
-</div>
-
-</section>
 
 <script src="script.js"></script>
 
