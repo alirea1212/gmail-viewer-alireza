@@ -1,127 +1,144 @@
-const mobileBtn = document.getElementById("mobileBtn");
-const pcBtn = document.getElementById("pcBtn");
+const video = document.getElementById("video");
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
 
-const deviceSelect = document.querySelector(".device-select");
-const mainPanel = document.querySelector(".main-panel");
+const emojiOutput = document.getElementById("emojiOutput");
+const gestureName = document.getElementById("gestureName");
+const fpsCounter = document.getElementById("fpsCounter");
+const handCount = document.getElementById("handCount");
 
-const countries = document.querySelectorAll(".country");
+let lastTime = Date.now();
+let frameCount = 0;
 
-const startTest = document.getElementById("startTest");
+/* 🎥 Camera Start */
+async function startCamera() {
+  const stream = await navigator.mediaDevices.getUserMedia({
+    video: true
+  });
 
-const dnsList = document.getElementById("dnsList");
+  video.srcObject = stream;
 
-const workingCount = document.getElementById("workingCount");
-const deadCount = document.getElementById("deadCount");
-const bestPing = document.getElementById("bestPing");
-
-let selectedCountry = "Germany";
-
-let working = 0;
-let dead = 0;
-let best = 999;
-
-mobileBtn.onclick = () => {
-
-    deviceSelect.classList.add("hidden");
-    mainPanel.classList.remove("hidden");
-
-    document.body.style.background = "#020617";
-
+  video.onloadeddata = () => {
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+  };
 }
 
-pcBtn.onclick = () => {
-
-    deviceSelect.classList.add("hidden");
-    mainPanel.classList.remove("hidden");
-
-    document.body.style.background = "#040b1a";
-
-}
-
-countries.forEach(btn => {
-
-    btn.onclick = () => {
-
-        countries.forEach(b => b.classList.remove("active"));
-
-        btn.classList.add("active");
-
-        selectedCountry = btn.dataset.country;
-
-    }
-
+/* 🤖 MediaPipe Hands */
+const hands = new Hands({
+  locateFile: (file) =>
+    `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`
 });
 
-function generateDNS(){
+hands.setOptions({
+  maxNumHands: 2,
+  modelComplexity: 1,
+  minDetectionConfidence: 0.7,
+  minTrackingConfidence: 0.7
+});
 
-    return `${Math.floor(Math.random()*255)}.${Math.floor(Math.random()*255)}.${Math.floor(Math.random()*255)}.${Math.floor(Math.random()*255)}`;
+/* 🧠 Gesture Recognition (simple logic) */
+function detectGesture(landmarks) {
+  const thumb = landmarks[4];
+  const index = landmarks[8];
+  const middle = landmarks[12];
+  const ring = landmarks[16];
+  const pinky = landmarks[20];
 
+  const isThumbUp = thumb.y < index.y;
+  const isIndexUp = index.y < middle.y;
+  const isPinkyUp = pinky.y < ring.y;
+
+  // 👍
+  if (isThumbUp && !isIndexUp) {
+    return "👍 Like";
+  }
+
+  // ✌️
+  if (isIndexUp && pinky.y < index.y) {
+    return "✌️ Peace";
+  }
+
+  // 👊
+  if (!isIndexUp && !isPinkyUp) {
+    return "👊 Fist";
+  }
+
+  // ✋
+  if (isIndexUp && middle.y < ring.y && pinky.y < ring.y) {
+    return "✋ Open Hand";
+  }
+
+  return "🤷 Unknown";
 }
 
-function simulatePing(){
-
-    return Math.floor(Math.random()*200);
-
+/* 😎 Emoji Map */
+function gestureToEmoji(gesture) {
+  switch (gesture) {
+    case "👍 Like":
+      return "👍";
+    case "✌️ Peace":
+      return "✌️";
+    case "👊 Fist":
+      return "👊";
+    case "✋ Open Hand":
+      return "✋";
+    default:
+      return "😐";
+  }
 }
 
-startTest.onclick = async () => {
+/* 🎯 Results from MediaPipe */
+hands.onResults((results) => {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    dnsList.innerHTML = "";
+  frameCount++;
 
-    working = 0;
-    dead = 0;
-    best = 999;
+  // FPS calc
+  const now = Date.now();
+  if (now - lastTime >= 1000) {
+    fpsCounter.innerText = `FPS: ${frameCount}`;
+    frameCount = 0;
+    lastTime = now;
+  }
 
-    for(let i=0;i<200;i++){
+  let handsDetected = results.multiHandLandmarks.length;
+  handCount.innerText = `Hands: ${handsDetected}`;
 
-        let dns = generateDNS();
+  if (handsDetected > 0) {
+    const landmarks = results.multiHandLandmarks[0];
 
-        let ping = simulatePing();
+    const gesture = detectGesture(landmarks);
+    const emoji = gestureToEmoji(gesture);
 
-        let isGood = ping < 120;
+    gestureName.innerText = gesture;
+    emojiOutput.innerText = emoji;
 
-        if(isGood){
-            working++;
-        }else{
-            dead++;
-        }
+    // draw skeleton
+    drawConnectors(ctx, landmarks, HAND_CONNECTIONS, {
+      color: "#6be7ff",
+      lineWidth: 2
+    });
 
-        if(ping < best){
-            best = ping;
-        }
+    drawLandmarks(ctx, landmarks, {
+      color: "#8b7bff",
+      lineWidth: 1
+    });
+  } else {
+    gestureName.innerText = "No Hand";
+    emojiOutput.innerText = "😐";
+  }
+});
 
-        workingCount.innerText = working;
-        deadCount.innerText = dead;
-        bestPing.innerText = best + " ms";
+/* 📡 Camera loop */
+const camera = new Camera(video, {
+  onFrame: async () => {
+    await hands.send({ image: video });
+  },
+  width: 1280,
+  height: 720
+});
 
-        let div = document.createElement("div");
-
-        div.classList.add("dns-item");
-
-        if(isGood){
-            div.classList.add("good");
-        }else{
-            div.classList.add("bad");
-        }
-
-        div.innerHTML = `
-        
-        <h3>${selectedCountry} DNS</h3>
-
-        <p>${dns}</p>
-
-        <div class="ping">Ping: ${ping} ms</div>
-
-        <div class="status">
-        ${isGood ? "🟢 WORKING" : "🔴 DEAD"}
-        </div>
-
-        `;
-
-        dnsList.appendChild(div);
-
-        await new Promise(resolve => setTimeout(resolve,30));
-
-    }
-
-}
+/* 🚀 Start everything */
+startCamera();
+camera.start();
