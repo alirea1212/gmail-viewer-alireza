@@ -1,81 +1,257 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI DNS Generator</title>
 
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+<title>GestureVerse AI</title>
+
+<meta name="description" content="AI Hand Gesture Recognition Platform">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+
 </head>
+
 <body>
 
-<div class="background-grid"></div>
+<div id="particles"></div>
+
+<!-- LOADING SCREEN -->
+
+<div id="loadingScreen">
+
+    <div class="logoBox">
+
+        <h1>GestureVerse AI</h1>
+
+        <p>
+            AI Gesture Recognition System
+        </p>
+
+        <div class="loadingBar">
+
+            <div class="loadingProgress"></div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- DEVICE SELECT -->
+
+<div id="deviceSelector">
+
+    <div class="selectorCard">
+
+        <h2>Select Device</h2>
+
+        <p>
+            Choose your preferred platform
+        </p>
+
+        <div class="deviceButtons">
+
+            <button id="mobileBtn">
+
+                📱 Mobile
+
+            </button>
+
+            <button id="desktopBtn">
+
+                🖥 Desktop
+
+            </button>
+
+        </div>
+
+        <button id="continueBtn">
+
+            Continue
+
+        </button>
+
+    </div>
+
+</div>
+
+<!-- MAIN APP -->
+
+<div id="appContainer">
 
 <header>
-    <h1>Create by Alireza-Namdar + AI</h1>
-    <p class="subtitle">Smart Gaming DNS Generator System</p>
+
+    <div class="brand">
+
+        <h1>GestureVerse AI</h1>
+
+        <span class="status online">
+
+            ● LIVE
+
+        </span>
+
+    </div>
+
 </header>
 
-<div class="device-select">
+<!-- LEFT SIDE -->
 
-    <h2>Select Device</h2>
+<div class="leftPanel">
 
-    <div class="device-buttons">
-        <button id="mobileBtn">📱 Mobile</button>
-        <button id="pcBtn">🖥 PC</button>
+    <div class="cameraContainer">
+
+        <video
+            id="video"
+            autoplay
+            muted
+            playsinline>
+        </video>
+
+        <canvas id="canvas"></canvas>
+
+        <div class="cameraHud">
+
+            <div class="hudItem">
+
+                Tracking
+
+            </div>
+
+            <div class="hudItem">
+
+                AI Enabled
+
+            </div>
+
+            <div class="hudItem">
+
+                Realtime
+
+            </div>
+
+        </div>
+
     </div>
 
 </div>
 
-<div class="main-panel hidden">
+<!-- RIGHT SIDE -->
 
-    <div class="country-panel">
+<div class="rightPanel">
 
-        <h2>Select Country</h2>
+    <div class="emojiCard">
 
-        <div class="countries">
+        <h2>Detected Emoji</h2>
 
-            <button class="country" data-country="Germany">🇩🇪 Germany</button>
-            <button class="country" data-country="Turkey">🇹🇷 Turkey</button>
-            <button class="country" data-country="India">🇮🇳 India</button>
-            <button class="country" data-country="UAE">🇦🇪 UAE</button>
+        <div id="emojiOutput">
 
+            😐
+
+        </div>
+
+        <div id="gestureName">
+
+            Waiting...
         </div>
 
     </div>
 
-    <div class="control-panel">
+    <div class="confidenceCard">
 
-        <button id="startTest">⚡ Start Smart Scan</button>
+        <h3>Confidence</h3>
+
+        <div class="progressOuter">
+
+            <div id="confidenceBar"></div>
+
+        </div>
+
+        <span id="confidenceText">
+
+            0%
+
+        </span>
 
     </div>
 
-    <div class="stats">
+    <div class="emojiLibrary">
 
-        <div class="card">
-            <h3>Working DNS</h3>
-            <span id="workingCount">0</span>
-        </div>
+        <h3>Supported Emojis</h3>
 
-        <div class="card">
-            <h3>Dead DNS</h3>
-            <span id="deadCount">0</span>
-        </div>
+        <div class="emojiGrid">
 
-        <div class="card">
-            <h3>Best Ping</h3>
-            <span id="bestPing">0 ms</span>
+            <div>👍</div>
+            <div>👎</div>
+            <div>👌</div>
+            <div>✌️</div>
+            <div>🤘</div>
+            <div>🤟</div>
+            <div>👊</div>
+            <div>✋</div>
+            <div>🖖</div>
+            <div>👉</div>
+            <div>☝️</div>
+            <div>🫶</div>
+            <div>🔥</div>
+            <div>💯</div>
+            <div>😎</div>
+            <div>🚀</div>
+
         </div>
 
     </div>
-
-    <div class="dns-list" id="dnsList"></div>
 
 </div>
 
-<script src="script.js"></script>
+<!-- BOTTOM HUD -->
+
+<footer>
+
+    <div class="systemInfo">
+
+        <span id="fpsCounter">
+
+            FPS: 0
+
+        </span>
+
+        <span id="handCount">
+
+            Hands: 0
+
+        </span>
+
+    </div>
+
+    <div class="creator">
+
+        Create by Alireza Namdari + AI
+
+    </div>
+
+</footer>
+
+</div>
+
+<!-- SOUND -->
+
+<audio id="detectSound">
+    <source src="sounds/detect.mp3" type="audio/mpeg">
+</audio>
+
+<script src="app.js"></script>
 
 </body>
 </html>
