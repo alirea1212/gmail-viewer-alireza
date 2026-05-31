@@ -181,3 +181,31 @@ button:hover {
     height: 40%;
   }
 }
+
+#loadingScreen {
+  z-index: 999;
+}
+
+#deviceSelector {
+  z-index: 998;
+}
+
+#appContainer {
+  z-index: 1;
+}
+
+html, body {
+  overflow: hidden;
+}
+
+video, canvas {
+  top: 0;
+  left: 0;
+}
+
+.leftPanel, .rightPanel {
+  display: inline-block;
+  vertical-align: top;
+}
+
+
