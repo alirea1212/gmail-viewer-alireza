@@ -1,7 +1,7 @@
 export default defineConfig({
   plugins: [react(), tailwindcss()],
 
-  base: "/alireza1212/",
+  base: "/gmail-viewer-alireza/",
 
   resolve: {
     alias: {
